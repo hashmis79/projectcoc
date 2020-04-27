@@ -1,1 +1,1 @@
-printf('Hello world')
+printf('Welcome to my app')
