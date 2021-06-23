@@ -1,19 +1,21 @@
 # Using PythonAPI CoppeliaSim
 * We can do many simulation tasks in CoppeliaSim, but the biggest turn down is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog we will be focusing on Python API. I will be showing you some basic tasks you can do using Python API.
+
 In this blog we will be covering the basic functions of Python API and their use in simulation</br>
-1)Setting Up the API</br>
-2)Establishing Communication with V-Rep</br>
-3)Retrieving Object Handles in python</br>
-4)Setting Actuator Velocities</br>
-5)Retrieving Image data from Vrep to python</br>
+* Setting Up the Files</br>
+* Establishing Communication with V-Rep</br>
+* Retrieving Object Handles in python</br>
+* Setting Actuator Velocities</br>
+* Retrieving Image data from Vrep to python</br>
 
  
 ## Setting Up the Files
-For Setting up the API, we should add the necessary files to our working directory that are needed for the API which can be found in the CoppeliaSim installation Folder
-1)      Navigate to `CoppeliaRobotics\CoppeliaSimEdu\programming\remoteApiBindings\python\python` and copy all the .py files into the working directory
-2)      Navigate to `CoppeliaRobotics\CoppeliaSimEdu\programming\remoteApiBindings\lib\lib`
-        Depending on the System your are on you can select the folder (Windows, Ubuntu 16/18, MacOS)
-        copy the .dll, .so or the .dylib file respectively.
+* For Setting up the API, we should add the necessary files to our working directory that are needed for the API which can be found in the CoppeliaSim installation Folder
+
+1) Navigate to `CoppeliaRobotics\CoppeliaSimEdu\programming\remoteApiBindings\python\python` and copy all the .py files into the working directory</br>
+2) Navigate to `CoppeliaRobotics\CoppeliaSimEdu\programming\remoteApiBindings\lib\lib`</br>
+  Depending on the System your are on you can select the folder (Windows, Ubuntu 16/18, MacOS)</br>
+  copy the .dll, .so or the .dylib file respectively.
  
 3) The next thing we want to do is that we have to create a threaded script in any component.
 4) In the Script we should add the following statement in the sysCall_threadmain() function
@@ -22,19 +24,20 @@ For Setting up the API, we should add the necessary files to our working directo
 simRemoteApi.start(19999)
 ```
 
-Note : 199999 is the port that will be used for API communications, this can be defined by you.
+**Note : 199999 is the port that will be used for API communications, this can be defined by you.**
 
 Now you are all set for using the PythonAPI in CoppeliaSim.
 ## Establishing Communication
-* For Establishing Communication we need to follow the following steps :
-1)      import the `sim` library in the code
-2)      Add the below statements to the code
+* For Establishing Communication we need to follow the following steps :</br>
+1) import the `sim` library in the code</br>
+2) Add the below statements to the code
+
 ```python
 sim.simxFinish(-1)
 
 clientID = sim.simxStart('127.0.0.1',19999,True,True,5000,5)
 ```
-Note : The port being used in the statement should match the port number specified while setting up.
+**Note : The port being used in the statement should match the port number specified while setting up.**
 
 * For Testing the establishment of communication you can run the following code after starting the simulation in CoppeliaSim :
 ```python
