@@ -108,10 +108,3 @@ img.resize = (resolution[0],resolution[1],3)
 ## References Used
 * [A video tutorial via a small project by Nikolai](https://youtu.be/SQont-mTnfM)</br>
 * [The official API documentation and Functions List provided by CoppeliaSim](https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm)</br>
-
-To use the remote API functionality in your Python script, you will need following 3 items:
-  sim.py
-  simConst.py
-  remoteApi.dll, remoteApi.dylib or remoteApi.so (depending on your target platform)
-Above files are located in CoppeliaSim's installation directory, under programming/remoteApiBindings/python. You might have to build the remoteApi shared library yourself (using remoteApiSharedLib.vcproj or makefile) if not already built. In that case, make sure you have defined NON_MATLAB_PARSING and MAX_EXT_API_CONNECTIONS=255 (and optionally DO_NOT_USE_SHARED_MEMORY) as a preprocessor definition.
-Once you have above elements in a directory known to Python, call import sim to load the library. To enable the remote API on the client side (i.e. your application), call sim.simxStart. See the simpleTest.py script in the programming/remoteApiBindings/python directory for an example. This page lists and describes all supported Python remote API functions. CoppeliaSim remote API functions can easily be recognized from their "simx"-prefix.
