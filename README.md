@@ -39,7 +39,7 @@ clientID = sim.simxStart('127.0.0.1',19999,True,True,5000,5)
 ```
 **Note: The port being used in the statement should match the port number specified while setting up.**
 
-* For Testing the establishment of communication you can run the following code after starting the simulation in CoppeliaSim :
+* For Testing the establishment of communication you have to run the following code after starting the simulation in CoppeliaSim :
 ```python
 import sim
 import sys
@@ -54,6 +54,8 @@ else:
     print("Connection not successful")
     sys.exit("Could not connect")
 ```
+**Note: You have to run the Simulation before you run the Code or else the Connection would not be established**
+
 ## Retrieving Object Handles in python
 * Object handles can be considered as a key or an ID which a component possesses. It is used to provide commands to a component(For eg. joint Velocity to a motor). PythonAPI also has an inbuilt function for that:
 
