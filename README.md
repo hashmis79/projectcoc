@@ -1,7 +1,7 @@
 # Using PythonAPI CoppeliaSim
-* We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Python API and some of its basic functions.
+* We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Setting up the Python API and some of its basic functions.
 
-In this blog we will be covering the basic functions of Python API and their use in simulation</br>
+We will be covering the basic functions of Python API and their use in simulation</br>
 * [Setting Up the Files](#setting-up-the-files)</br>
 * [Establishing Communication with V-Rep](#establishing-communication)</br>
 * [Retrieving Object Handles in python](#retrieving-object-handles-in-python)</br>
@@ -18,10 +18,13 @@ In this blog we will be covering the basic functions of Python API and their use
   copy the .dll, .so, or the .dylib file respectively to your working directory.
  
 3) The next thing we want to do is that we have to create a threaded script in any component of the scene where you want to implement API.
+<p align="center">
+  <img src="./Assets/Adding_Script.gif" height ="512"/>
+</p>
 4) In the Script we should add the following statement in the sysCall_threadmain() function
 
 ```python
-simRemoteApi.start(19999)
+simRemoteApi.start(19990)
 ```
 
 **Note: 19999 is the port that will be used for API communications, this can be defined by you.**
@@ -35,7 +38,7 @@ Now you are all set for using the PythonAPI in CoppeliaSim.
 ```python
 sim.simxFinish(-1)
 
-clientID = sim.simxStart('127.0.0.1',19999,True,True,5000,5)
+clientID = sim.simxStart('127.0.0.1',19990,True,True,5000,5)
 ```
 **Note: The port being used in the statement should match the port number specified while setting up.**
 
@@ -46,7 +49,7 @@ import sys
 
 sim.simxFinish(-1)
 
-clientID=sim.simxStart('127.0.0.1',19999,True,True,5000,5)
+clientID=sim.simxStart('127.0.0.1',19990,True,True,5000,5)
 
 if clientID != -1:
     print("Connected to the remote API server")
@@ -55,6 +58,9 @@ else:
     sys.exit("Could not connect")
 ```
 **Note: You have to run the Simulation before you run the Code or else the Connection would not be established**
+<p align="center">
+  <img src="./Assets/StartAPI.gif" height ="512"/>
+</p>
 
 ## Retrieving Object Handles in python
 * Object handles can be considered as a key or an ID which a component possesses. It is used to provide commands to a component(For eg. joint Velocity to a motor). PythonAPI also has an inbuilt function for that:
@@ -62,10 +68,10 @@ else:
 ```python
 sim.simxGetObjectHandle()
 ```
-
-|Parameters   | clientID: the client ID () </br> objectName: name of the object. </br>operationMode: a remote API function operation mode. Recommended operation mode for this function is `sim.simx_opmode_blocking`  |
-| :-----      | :--- |
-|Return Values| returnCode: a remote API function return code </br> handle: the Object handle|
+|             |             |
+|-------------|-------------|
+|**Parameters**   | **clientID**: the client ID () </br> **objectName**: name of the object. </br>**operationMode**: a remote API function operation mode. Recommended operation mode for this function is `sim.simx_opmode_blocking`  |
+|**Return Values**| **returnCode**: a remote API function return code </br> handle: the Object handle|
 
 An Example of using this Function is :
 ```python
@@ -77,9 +83,11 @@ error_code,motor_handle = sim.simxGetObjectHandle(clientID,"Object Name in Coppe
 ```python
 sim.simxSetJointTargetVelocity()
 ```
-|Parameters : | clientID: the client ID. refer to simxStart.</br>jointHandle: handle of the joint</br>targetVelocity: target velocity of the joint (linear or angular velocity depending on the joint-type)</br>operationMode: a remote API function operation mode. Recommended operation modes for this function are `simx_opmode_oneshot` or `simx_opmode_streaming`   |
-| :-----      | :--- |
-|Return Values| returnCode: a remote API function return code |
+
+|             |             |
+|-------------|-------------|
+|**Parameters** | **clientID**: the client ID. refer to simxStart.</br>**jointHandle**: handle of the joint</br>**targetVelocity**: target velocity of the joint (linear or angular velocity depending on the joint-type)</br>**operationMode**: a remote API function operation mode. Recommended operation modes for this function are `simx_opmode_oneshot` or `simx_opmode_streaming`   |
+|**Return Values**| **returnCode**: a remote API function return code |
 
 An Example of using this Function is :
 ```python
@@ -91,9 +99,11 @@ error_Code = sim.simxSetJointTargetVelocity(clientID,motor_handle,10,sim.simx_op
 ```python
 sim.simxGetVisionSensorImage()
 ```
-|Parameters :| clientID: the client ID. refer to simxStart.</br>sensorHandle: handle of the vision sensor</br>options: image options, bit-coded:bit0 set: each image pixel is a byte (greyscale image), otherwise each image pixel is a rgb byte-triplet</br>operationMode: a remote API function operation mode. Recommended operation modes for this function are `sim.simx_opmode_streaming` |
-| :-----      | :--- |
-|Return Values| returnCode: a remote API function return code</br>resolution: the resolution of the image (x,y)<br/>image: the image data.  |
+
+|             |             |
+|-------------|-------------|
+|**Parameters**| **clientID**: the client ID. refer to simxStart.</br>**sensorHandle**: handle of the vision sensor</br>**options**: image options, bit-coded:bit0 set: each image pixel is a byte (greyscale image), otherwise each image pixel is a rgb byte-triplet</br>**operationMode**: a remote API function operation mode. Recommended operation modes for this function are `sim.simx_opmode_streaming` |
+|**Return Values**| **returnCode**: a remote API function return code</br>resolution: the resolution of the image (x,y)<br/>image: the image data.  |
 
 
 The image array returned by the function is a 1D Array. So for the image to be displayable we first resize the image and convert it to RGB formate using `NumPy`
