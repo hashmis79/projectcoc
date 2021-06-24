@@ -17,7 +17,7 @@ In this blog we will be covering the basic functions of Python API and their use
   Depending on the System your are on you can select the folder (Windows, Ubuntu 16/18, MacOS)</br>
   copy the .dll, .so or the .dylib file respectively.
  
-3) The next thing we want to do is that we have to create a threaded script in any component.
+3) The next thing we want to do is that we have to create a threaded script in any component of the scene where you want to implement API.
 4) In the Script we should add the following statement in the sysCall_threadmain() function
 
 ```python
