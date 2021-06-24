@@ -2,8 +2,8 @@
 * We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Python API. I will be showing you some basic tasks you can do using Python API.
 
 In this blog we will be covering the basic functions of Python API and their use in simulation</br>
-* Setting Up the Files</br>
-* Establishing Communication with V-Rep</br>
+* [Setting Up the Files](#setting-up-the-files)</br>
+* [Establishing Communication with V-Rep](#establishing-communication-with-v-Rep)</br>
 * Retrieving Object Handles in python</br>
 * Setting Actuator Velocities</br>
 * Retrieving Image data from Vrep to python</br>
