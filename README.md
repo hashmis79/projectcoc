@@ -63,8 +63,8 @@ else:
 sim.simxGetObjectHandle()
 ```
 
-| Parameters : | clientID: the client ID () </br> objectName: name of the object. </br>operationMode: a remote API function operation mode. Recommended operation mode for this function is `sim.simx_opmode_blocking`  |
-| :--- | :--- |
+|Parameters   | clientID: the client ID () </br> objectName: name of the object. </br>operationMode: a remote API function operation mode. Recommended operation mode for this function is `sim.simx_opmode_blocking`  |
+| :-----      | :--- |
 |Return Values| returnCode: a remote API function return code </br> handle: the Object handle|
 
 An Example of using this Function is :
@@ -77,8 +77,8 @@ error_code,motor_handle = sim.simxGetObjectHandle(clientID,"Object Name in Coppe
 ```python
 sim.simxSetJointTargetVelocity()
 ```
-| Parameters : | clientID: the client ID. refer to simxStart.</br>jointHandle: handle of the joint</br>targetVelocity: target velocity of the joint (linear or angular velocity depending on the joint-type)</br>operationMode: a remote API function operation mode. Recommended operation modes for this function are `simx_opmode_oneshot` or `simx_opmode_streaming`   |
-| :--- | :--- |
+|Parameters : | clientID: the client ID. refer to simxStart.</br>jointHandle: handle of the joint</br>targetVelocity: target velocity of the joint (linear or angular velocity depending on the joint-type)</br>operationMode: a remote API function operation mode. Recommended operation modes for this function are `simx_opmode_oneshot` or `simx_opmode_streaming`   |
+| :-----      | :--- |
 |Return Values| returnCode: a remote API function return code |
 
 An Example of using this Function is :
@@ -91,8 +91,8 @@ error_Code = sim.simxSetJointTargetVelocity(clientID,motor_handle,10,sim.simx_op
 ```python
 sim.simxGetVisionSensorImage()
 ```
-| Parameters : | clientID: the client ID. refer to simxStart.</br>sensorHandle: handle of the vision sensor</br>options: image options, bit-coded:bit0 set: each image pixel is a byte (greyscale image), otherwise each image pixel is a rgb byte-triplet</br>operationMode: a remote API function operation mode. Recommended operation modes for this function are `sim.simx_opmode_streaming` |
-| :--- | :--- |
+|Parameters :| clientID: the client ID. refer to simxStart.</br>sensorHandle: handle of the vision sensor</br>options: image options, bit-coded:bit0 set: each image pixel is a byte (greyscale image), otherwise each image pixel is a rgb byte-triplet</br>operationMode: a remote API function operation mode. Recommended operation modes for this function are `sim.simx_opmode_streaming` |
+| :-----      | :--- |
 |Return Values| returnCode: a remote API function return code</br>resolution: the resolution of the image (x,y)<br/>image: the image data.  |
 
 
@@ -100,7 +100,7 @@ The image array returned by the function is a 1D Array. So for the image to be d
 
 
 ```python
-errorCode,resolution,image=vrep.simxGetVisionSensorImage(clientID,cam_handle,0,vrep.simx_opmode_streaming)
+errorCode,resolution,image= sim.simxGetVisionSensorImage(clientID,cam_handle,0,vrep.simx_opmode_streaming)
 img = np.array(image,dtype = np.uint8)
 img.resize = (resolution[0],resolution[1],3)
 ```
