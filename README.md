@@ -1,5 +1,5 @@
 # Using PythonAPI CoppeliaSim
-* We can do many simulation tasks in CoppeliaSim, but the biggest turn down is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog we will be focusing on Python API. I will be showing you some basic tasks you can do using Python API.
+* We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Python API. I will be showing you some basic tasks you can do using Python API.
 
 In this blog we will be covering the basic functions of Python API and their use in simulation</br>
 * Setting Up the Files</br>
@@ -14,8 +14,8 @@ In this blog we will be covering the basic functions of Python API and their use
 
 1) Navigate to `CoppeliaRobotics\CoppeliaSimEdu\programming\remoteApiBindings\python\python` and copy all the .py files into the working directory</br>
 2) Navigate to `CoppeliaRobotics\CoppeliaSimEdu\programming\remoteApiBindings\lib\lib`</br>
-  Depending on the System your are on you can select the folder (Windows, Ubuntu 16/18, MacOS)</br>
-  copy the .dll, .so or the .dylib file respectively to your working directory.
+  Depending on the System you are on, you can select the folder (Windows, Ubuntu 16/18, MacOS)</br>
+  copy the .dll, .so, or the .dylib file respectively to your working directory.
  
 3) The next thing we want to do is that we have to create a threaded script in any component of the scene where you want to implement API.
 4) In the Script we should add the following statement in the sysCall_threadmain() function
@@ -24,7 +24,7 @@ In this blog we will be covering the basic functions of Python API and their use
 simRemoteApi.start(19999)
 ```
 
-**Note : 199999 is the port that will be used for API communications, this can be defined by you.**
+**Note: 199999 is the port that will be used for API communications, this can be defined by you.**
 
 Now you are all set for using the PythonAPI in CoppeliaSim.
 ## Establishing Communication
@@ -37,7 +37,7 @@ sim.simxFinish(-1)
 
 clientID = sim.simxStart('127.0.0.1',19999,True,True,5000,5)
 ```
-**Note : The port being used in the statement should match the port number specified while setting up.**
+**Note: The port being used in the statement should match the port number specified while setting up.**
 
 * For Testing the establishment of communication you can run the following code after starting the simulation in CoppeliaSim :
 ```python
@@ -55,7 +55,7 @@ else:
     sys.exit("Could not connect")
 ```
 ## Retrieving Object Handles in python
-* Object handles can be considered as a key or an ID which a component posses. It is used to provide commands to a component(For eg. joint Velocity to a motor). PythonAPI also has an inbuild function for that:
+* Object handles can be considered as a key or an ID which a component possesses. It is used to provide commands to a component(For eg. joint Velocity to a motor). PythonAPI also has an inbuilt function for that:
 
 ```python
 sim.simxGetObjectHandle()
@@ -94,7 +94,7 @@ sim.simxGetVisionSensorImage()
 |Return Values| returnCode: a remote API function return code</br>resolution: the resolution of the image (x,y)<br/>image: the image data.  |
 
 
-The image array returned by the function is a 1D Array. So for the image to be displayable we first resize the image and convert it to RGB formate using `numpy`
+The image array returned by the function is a 1D Array. So for the image to be displayable we first resize the image and convert it to RGB formate using `NumPy`
 
 
 ```python
@@ -103,7 +103,7 @@ img = np.array(image,dtype = np.uint8)
 img.resize = (resolution[0],resolution[1],3)
 ```
 ## Finding the rest of the Functions 
-* You can find the rest of the equivalent functions from the [PythonAPI Functions list](https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm). You just have to just search the lua function's name and you will find the Python equivalent function and its description. 
+* You can find the rest of the equivalent functions from the [PythonAPI Functions list](https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm). You just have to search the Lua function's name and you will find the Python equivalent function and its description. 
 
 ## References Used
 * [A video tutorial via a small project by Nikolai](https://youtu.be/SQont-mTnfM)</br>
