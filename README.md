@@ -1,12 +1,12 @@
 # Using PythonAPI CoppeliaSim
-* We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Python API. I will be showing you some basic tasks you can do using Python API.
+* We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Python API and some of its basic functions.
 
 In this blog we will be covering the basic functions of Python API and their use in simulation</br>
 * [Setting Up the Files](#setting-up-the-files)</br>
-* [Establishing Communication with V-Rep](#establishing-communication-with-v-Rep)</br>
-* Retrieving Object Handles in python</br>
-* Setting Actuator Velocities</br>
-* Retrieving Image data from Vrep to python</br>
+* [Establishing Communication with V-Rep](#establishing-communication)</br>
+* [Retrieving Object Handles in python](#retrieving-object-handles-in-python)</br>
+* [Setting Actuator Velocities](#setting-actuator-velocities)</br>
+* [Retrieving Image data from Vrep to python](#retrieving-image-data)</br>
 
  
 ## Setting Up the Files
@@ -24,7 +24,7 @@ In this blog we will be covering the basic functions of Python API and their use
 simRemoteApi.start(19999)
 ```
 
-**Note: 199999 is the port that will be used for API communications, this can be defined by you.**
+**Note: 19999 is the port that will be used for API communications, this can be defined by you.**
 
 Now you are all set for using the PythonAPI in CoppeliaSim.
 ## Establishing Communication
