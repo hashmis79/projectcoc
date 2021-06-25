@@ -68,10 +68,17 @@ else:
 ```python
 sim.simxGetObjectHandle()
 ```
-|             |             |
-|-------------|-------------|
-|**Parameters**   | **clientID**: the client ID () </br> **objectName**: name of the object. </br>**operationMode**: a remote API function operation mode. Recommended operation mode for this function is `sim.simx_opmode_blocking`  |
-|**Return Values**| **returnCode**: a remote API function return code </br> handle: the Object handle|
+
+<table align="center">
+    <tr>
+     <td align="left"><b>Parameters :</b></td>
+     <td align="left"><b>clientID</b>: the client ID  </br> <b>objectName</b>: name of the object. </br><b>operationMode</b>: a remote API function operation mode. Recommended operation mode for this function is <code>sim.simx_opmode_blocking</code></td>
+    </tr>
+    <tr>
+        <td align="left"><b>Return Values</b></td>
+        <td align="left"><b>returnCode</b>: a remote API function return code </br> <b>handle</b>: the Object handle</td>
+    </tr>
+</table>
 
 An Example of using this Function is :
 ```python
@@ -84,10 +91,16 @@ error_code,motor_handle = sim.simxGetObjectHandle(clientID,"Object Name in Coppe
 sim.simxSetJointTargetVelocity()
 ```
 
-|             |             |
-|-------------|-------------|
-|**Parameters** | **clientID**: the client ID. refer to simxStart.</br>**jointHandle**: handle of the joint</br>**targetVelocity**: target velocity of the joint (linear or angular velocity depending on the joint-type)</br>**operationMode**: a remote API function operation mode. Recommended operation modes for this function are `simx_opmode_oneshot` or `simx_opmode_streaming`   |
-|**Return Values**| **returnCode**: a remote API function return code |
+<table align="center">
+    <tr>
+     <td align="left"><b>Parameters :</b></td>
+     <td align="left"><b>clientID</b>: the client ID  </br> <b>jointHandle</b>: handle of the joint </br><b>targetVelocity</b>: target velocity of the joint (linear or angular velocity depending on the joint-type)</br><b>operationMode</b>: a remote API function operation mode. Recommended operation mode for this function is <code>sim.simx_opmode_oneshot</code> or <code>sim.simx_opmode_streaming</code></td>
+    </tr>
+    <tr>
+        <td align="left"><b>Return Values</b></td>
+        <td align="left"><b>returnCode</b>: a remote API function return code </td>
+    </tr>
+</table>
 
 An Example of using this Function is :
 ```python
@@ -100,10 +113,16 @@ error_Code = sim.simxSetJointTargetVelocity(clientID,motor_handle,10,sim.simx_op
 sim.simxGetVisionSensorImage()
 ```
 
-|             |             |
-|-------------|-------------|
-|**Parameters**| **clientID**: the client ID. refer to simxStart.</br>**sensorHandle**: handle of the vision sensor</br>**options**: image options, bit-coded:bit0 set: each image pixel is a byte (greyscale image), otherwise each image pixel is a rgb byte-triplet</br>**operationMode**: a remote API function operation mode. Recommended operation modes for this function are `sim.simx_opmode_streaming` |
-|**Return Values**| **returnCode**: a remote API function return code</br>resolution: the resolution of the image (x,y)<br/>image: the image data.  |
+<table align="center">
+    <tr>
+     <td align="left"><b>Parameters :</b></td>
+     <td align="left"><b>clientID</b>: the client ID  </br> <b>sensorHandle</b>: handle of the vision sensor </br><b>options</b>: image options, bit-coded:bit0 set: each image pixel is a byte (greyscale image), otherwise each image pixel is a rgb byte-triplet</br><b>operationMode</b>: a remote API function operation mode. Recommended operation mode for this function is <code>sim.simx_opmode_streaming</code></td>
+    </tr>
+    <tr>
+        <td align="left"><b>Return Values</b></td>
+        <td align="left"><b>returnCode</b>: a remote API function return code </br> <b>resolution</b>: the resolution of the image (x,y)</br><b>image</b>: the image data</td>
+    </tr>
+</table>
 
 
 The image array returned by the function is a 1D Array. So for the image to be displayable we first resize the image and convert it to RGB formate using `NumPy`
