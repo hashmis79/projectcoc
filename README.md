@@ -19,7 +19,7 @@ We will be covering the basic functions of Python API and their use in simulatio
  
 3) The next thing we want to do is that we have to create a threaded script in any component of the scene where you want to implement API.
 <p align="center">
-  <img src="./Assets/Adding_Script.gif" height ="512"/>
+  <img src="./Assets/PythonAPI_Adding_Script.gif" height ="512"/>
 </p>
 4) In the Script we should add the following statement in the sysCall_threadmain() function
 
@@ -59,7 +59,7 @@ else:
 ```
 **Note: You have to run the Simulation before you run the Code or else the Connection would not be established**
 <p align="center">
-  <img src="./Assets/StartAPI.gif" height ="512"/>
+  <img src="./Assets/PythonAPI_StartAPI.gif" height ="512"/>
 </p>
 
 ## Retrieving Object Handles in python
@@ -127,12 +127,81 @@ sim.simxGetVisionSensorImage()
 
 The image array returned by the function is a 1D Array. So for the image to be displayable we first resize the image and convert it to RGB formate using `NumPy`
 
+An Example of using this Function is :
 
 ```python
 errorCode,resolution,image= sim.simxGetVisionSensorImage(clientID,cam_handle,0,vrep.simx_opmode_streaming)
 img = np.array(image,dtype = np.uint8)
 img.resize = (resolution[0],resolution[1],3)
 ```
+## Stopping Simulation 
+* We can use the below function for stopping the simulation :
+
+```python
+sim.simxStopSimulation()
+```
+
+<table align="center">
+    <tr>
+     <td align="left"><b>Parameters :</b></td>
+     <td align="left"><b>clientID</b>: the client ID  </br> <b>operationMode</b>: a remote API function operation mode. Recommended operation mode for this function is <code>sim.simx_opmode_oneshot</code></td>
+    </tr>
+    <tr>
+        <td align="left"><b>Return Values</b></td>
+        <td align="left"><b>returnCode</b>: a remote API function return code 
+</table>
+An Example of using this Function is :
+```python
+sim.simxStopSimulation(clientID, sim.simx_opmode_oneshot_wait)
+```
+
+## Putting all of it together
+* After learning all of the above functions. We will write a simple code for an environment containing a Vision sensor, a Pioneer_p3dx (under Mobile Robots), and a plant.
+The below code establishes a connection with the simulation and commands the joint motors. It also retrieves the image from the vision sensor and displays after resizing it.
+```python
+import sim 
+import sys
+import numpy as np
+import cv2
+
+sim.simxFinish(-1)
+
+clientID = sim.simxStart('127.0.0.1',19990,True,True,5000,5)
+
+if clientID!= -1:
+    print("Connected to Remote API Server")
+else:
+    print("Connection failed")
+    sys.exit('Could not reconnect')
+
+errorcode,left_motor_handle = sim.simxGetObjectHandle(clientID,'Pioneer_p3dx_leftMotor',sim.simx_opmode_oneshot_wait)
+errorcode,right_motor_handle = sim.simxGetObjectHandle(clientID,'Pioneer_p3dx_rightMotor',sim.simx_opmode_oneshot_wait)
+print("Given Target Velocities to the Joints")
+errorcode,cam_handle = sim.simxGetObjectHandle(clientID,'Cam',sim.simx_opmode_oneshot_wait)
+try:
+    while True:
+
+        sim.simxSetJointTargetVelocity(clientID,left_motor_handle,1,sim.simx_opmode_streaming)
+        sim.simxSetJointTargetVelocity(clientID,right_motor_handle,1,sim.simx_opmode_streaming)
+
+        errorCode,resolution,image=sim.simxGetVisionSensorImage(clientID,cam_handle,0,sim.simx_opmode_streaming)
+        if len(image)>0:
+            image = np.array(image,dtype=np.dtype('uint8'))
+            image = np.reshape(image,(resolution[1],resolution[0],3))
+            cv2.imshow("Image", image)
+            cv2.waitKey(10)
+except KeyboardInterrupt:   #Checks if ctrl+c is pressed 
+    sim.simxStopSimulation(clientID, sim.simx_opmode_oneshot_wait)
+    print("Stopping Simulation")
+    pass
+    
+sim.simxFinish(clientID)
+```
+## Output :
+<p align="center">
+  <img src="./Assets/PythonAPI_Final_Code.gif" height ="512"/>
+</p>
+
 ## Finding the rest of the Functions 
 * You can find the rest of the equivalent functions from the [PythonAPI Functions list](https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm). You just have to search the Lua function's name and you will find the Python equivalent function and its description. 
 
