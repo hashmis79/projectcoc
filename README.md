@@ -1,4 +1,10 @@
-# Using PythonAPI CoppeliaSim
+---
+layout: post
+title: Using PythonAPI for CoppeliaSim
+tags: simulation Python API
+description: Basic functions and Usage of PythonAPI in CoppeliaSim
+---
+-- [Saad Hashmi](https://github.com/hashmis79)
 * We can do many simulation tasks in CoppeliaSim, but the biggest turndown is that we will have to learn a whole new language called Lua. To overcome this CoppeliaSim provides us with an API with can connect CoppeliaSim to many languages including Python, C, C++. In this blog, we will be focusing on Setting up the Python API and some of its basic functions.
 
 We will be covering the basic functions of Python API and their use in simulation</br>
